@@ -25,6 +25,8 @@ public class Player extends Benda
     public void act() 
     {
         gerak();
+        
+        makan();
     }
     
     public void gerak()
@@ -36,12 +38,46 @@ public class Player extends Benda
             posisiX -= kecepatanX;
         
         //Bound Check
-        if(posisiX <= 0)
-            posisiX = 0;
-        if(posisiX >= 300)
-            posisiX = 300;
+        double imageOffset = getImage().getWidth() / 2;
+        
+        if(posisiX <= imageOffset)
+            posisiX = imageOffset;
+        if(posisiX >= 300 - imageOffset)
+            posisiX = 300 - imageOffset;
         
         //Set position
         setLocation((int)posisiX, getY());
+    }
+    
+    void ubahNyawa(int nilai)
+    {
+        nyawa += nilai;
+        
+        //Bound check
+        if(nyawa > 3)
+            nyawa = 3;
+        if(nyawa < 0)
+            nyawa = 0;
+    }
+    
+    void ubahPoin(int nilai)
+    {
+        totalBayar += nilai;
+        
+        //Bound check
+        if(totalBayar < 0)
+            totalBayar = 0;
+    }
+    
+    void makan()
+    {
+        if(isTouching(Makanan.class))
+        {
+            Makanan other = (Makanan)getOneIntersectingObject(Makanan.class);
+            
+            ubahPoin(other.harga);
+            
+            getWorld().removeObject(other);
+        }
     }
 }
