@@ -9,11 +9,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Angkringan extends World
 {
     GreenfootImage gambarAngkringan = new GreenfootImage("NasiKucing.png");
+    Makanan nasiKucing = new Makanan(1500, gambarAngkringan);
     
-    /**
-     * Constructor for objects of class Angkringan.
-     * 
-     */
     public Angkringan()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
@@ -21,6 +18,6 @@ public class Angkringan extends World
         
         addObject(new Player(), 150, 450);
         
-        addObject(new Makanan(1500, gambarAngkringan), 0, 0);
+        addObject(nasiKucing, 0, 0);
     }
 }
