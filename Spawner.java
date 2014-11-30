@@ -1,12 +1,13 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
+
 /**
- * Write a description of class Angkringan here.
+ * Write a description of class Spawner here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Angkringan extends World
+public class Spawner extends Actor
 {
     ArrayList<Makanan> listMakanan = new ArrayList<Makanan>();
     
@@ -22,35 +23,12 @@ public class Angkringan extends World
     Makanan tusukSate = new Makanan(-100, new GreenfootImage("TusukSate.png"));
     Makanan kulitPisang = new Makanan(-500, new GreenfootImage("KulitPisang.png"));
     
-    //DelTimer
+    //Delta Time
     double deltaTime;
-    double lastTime = System.currentTimeMillis();
+    double lastTime;
     
-    double waktuPanggil = 500;
+    double waktuPanggil = 1000;
     double timer = 0;
-    
-    double speedMultiplier = 1;
-    
-    double timerExtra = 0;
-    double waktuSpawnerExtra = 10000;
-    
-    public void act()
-    {
-        spawnerExtra();
-        
-        muncul();
-        
-        speedMultiplier += 0.001;
-        
-        waktuPanggil -= 0.05;
-        //System.out.println(waktuPanggil);
-        
-        if(waktuPanggil <= 0)
-            waktuPanggil = 0;
-                
-        setDeltaTime();
-    }
-    
     
     private void setDeltaTime()
     {
@@ -61,19 +39,8 @@ public class Angkringan extends World
         lastTime = time;
     }
     
-    public Angkringan()
-    {    
-        // Create a new world with 300x500 cells with a cell size of 1x1 pixels.
-        super(300, 500, 1); 
-        
-        addObject(new Player(), 150, 450);
-        
-        //Score
-        addObject(new Score(), 200, 10);
-        
-        //Life
-        addObject(new Life(), 50, 10);
-        
+    public Spawner()
+    {
         //Adding to list
         listMakanan.add(nasiKucing);
         listMakanan.add(gorengan);
@@ -88,11 +55,11 @@ public class Angkringan extends World
         listMakanan.add(kulitPisang);
     }
     
-    public Makanan Instantiante(Makanan objek)
+    public void act() 
     {
-        Makanan baru = new Makanan(objek.harga, objek.getImage());
+        setDeltaTime();
         
-        return baru;
+        muncul();
     }
     
     public void muncul()
@@ -104,21 +71,16 @@ public class Angkringan extends World
             int posisiX = Greenfoot.getRandomNumber(200) + 50;
             int pilihObjek = Greenfoot.getRandomNumber(10);
             
-            addObject(Instantiante(listMakanan.get(pilihObjek)), posisiX, 0);
+            getWorld().addObject(Instantiante(listMakanan.get(pilihObjek)), posisiX, 0);
             
             timer = 0;
         }
     }
     
-    public void spawnerExtra()
+    public Makanan Instantiante(Makanan objek)
     {
-        timerExtra += deltaTime;
+        Makanan baru = new Makanan(objek.harga, objek.getImage());
         
-        if(timerExtra >= waktuSpawnerExtra)
-        {
-            addObject(new Spawner(), 0, 0);
-            
-            timerExtra = 0;
-        }
+        return baru;
     }
 }

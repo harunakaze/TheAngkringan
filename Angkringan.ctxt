@@ -9,4 +9,6 @@ comment3.params=objek
 comment3.target=Makanan\ Instantiante(Makanan)
 comment4.params=
 comment4.target=void\ muncul()
-numComments=5
+comment5.params=
+comment5.target=void\ spawnerExtra()
+numComments=6

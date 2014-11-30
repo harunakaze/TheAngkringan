@@ -58,7 +58,7 @@ public class Player extends Benda
         //Bound check
         if(nyawa > 3)
             nyawa = 3;
-        if(nyawa < 0)
+        if(nyawa <= 0)
         {
             nyawa = 0;
             mati();
