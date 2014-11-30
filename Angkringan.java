@@ -26,7 +26,7 @@ public class Angkringan extends World
     double deltaTime;
     double lastTime;
     
-    double waktuPanggil = 750;
+    double waktuPanggil = 500;
     double timer = 0;
     
     double speedMultiplier = 1;
@@ -39,11 +39,11 @@ public class Angkringan extends World
         
         speedMultiplier += 0.001;
         
-        //waktuPanggil -= 0.1;
+        waktuPanggil -= 0.05;
         //System.out.println(waktuPanggil);
         
-        //if(waktuPanggil <= 0)
-        //    waktuPanggil = 0;
+        if(waktuPanggil <= 0)
+            waktuPanggil = 0;
     }
     
     

@@ -16,7 +16,7 @@ public class Player extends Benda
     
     public Player()
     {
-        kecepatanX = 1.5;
+        kecepatanX = 5;
     }
     
     public void addedToWorld(World world)
