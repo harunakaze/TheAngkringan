@@ -8,5 +8,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public abstract class Benda extends Actor
 {
-    double kecepatanY;   
+    double kecepatanY;
+    double kecepatanX;
+    
+    double posisiY;
+    double posisiX;
 }

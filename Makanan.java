@@ -14,10 +14,11 @@ public class Makanan extends BendaJatuh
     {
         this.harga = harga;
         setImage(gambar);
+        kecepatanY = 2;
     }
     
     public void act() 
     {
         super.jatuh();
-    }    
+    }
 }
