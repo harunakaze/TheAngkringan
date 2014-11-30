@@ -8,13 +8,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public abstract class BendaJatuh extends Benda
 {   
-    public void addedToWorld(World world)
-    {
-        posisiY = getY();
-    }
+    Angkringan theWorld;
     public void jatuh()
     {
-        posisiY += super.kecepatanY;
+        posisiY += super.kecepatanY * theWorld.speedMultiplier;
         setLocation(getX(), (int)posisiY);
     }
 }

@@ -9,17 +9,21 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Player extends Benda
 {
     int totalBayar;
-    int nyawa;
+    int nyawa = 3;
     int multiplier;
+    
+    private double imageOffset;
     
     public Player()
     {
-        kecepatanX = 1;
+        kecepatanX = 1.5;
     }
     
     public void addedToWorld(World world)
     {
         posisiX = getX();
+        
+        imageOffset = getImage().getWidth() / 2;
     }
     
     public void act() 
@@ -37,9 +41,7 @@ public class Player extends Benda
         if(Greenfoot.isKeyDown("left"))
             posisiX -= kecepatanX;
         
-        //Bound Check
-        double imageOffset = getImage().getWidth() / 2;
-        
+        //Bound Check     
         if(posisiX <= imageOffset)
             posisiX = imageOffset;
         if(posisiX >= 300 - imageOffset)
@@ -57,7 +59,10 @@ public class Player extends Benda
         if(nyawa > 3)
             nyawa = 3;
         if(nyawa < 0)
+        {
             nyawa = 0;
+            mati();
+        }
     }
     
     void ubahPoin(int nilai)
@@ -65,7 +70,7 @@ public class Player extends Benda
         totalBayar += nilai;
         
         //Bound check
-        if(totalBayar < 0)
+        if(totalBayar <= 0)
             totalBayar = 0;
     }
     
@@ -79,5 +84,11 @@ public class Player extends Benda
             
             getWorld().removeObject(other);
         }
+    }
+    
+    void mati()
+    {
+        getWorld().addObject(new GameOver(), 150, 250);
+        Greenfoot.stop();
     }
 }

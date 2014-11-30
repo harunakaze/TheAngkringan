@@ -1,4 +1,12 @@
 #BlueJ class context
 comment0.params=
-comment0.target=Angkringan()
-numComments=1
+comment0.target=void\ act()
+comment1.params=
+comment1.target=void\ setDeltaTime()
+comment2.params=
+comment2.target=Angkringan()
+comment3.params=objek
+comment3.target=Makanan\ Instantiante(Makanan)
+comment4.params=
+comment4.target=void\ muncul()
+numComments=5
