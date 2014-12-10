@@ -8,6 +8,7 @@ import java.util.*;
  */
 public class Angkringan extends World
 {
+    //Makanan
     ArrayList<Makanan> listMakanan = new ArrayList<Makanan>();
     
     Makanan nasiKucing = new Makanan(1500, new GreenfootImage("NasiKucing.png"));
@@ -15,33 +16,49 @@ public class Angkringan extends World
     Makanan sateAyam = new Makanan(1000, new GreenfootImage("SateAyam.png"));
     Makanan usus = new Makanan(1000, new GreenfootImage("Usus.png"));
     Makanan keong = new Makanan(1000, new GreenfootImage("Keong.png"));
-    Makanan bungkusNasi = new Makanan(-500, new GreenfootImage("BungkusNasi.png"));
-    Makanan karet = new Makanan(-100, new GreenfootImage("Karet.png"));
-    Makanan batangCabe = new Makanan(-50, new GreenfootImage("BatangCabe.png"));
-    Makanan arang = new Makanan(-100, new GreenfootImage("Arang.png"));
-    Makanan tusukSate = new Makanan(-100, new GreenfootImage("TusukSate.png"));
-    Makanan kulitPisang = new Makanan(-500, new GreenfootImage("KulitPisang.png"));
+    Makanan bungkusNasi = new Makanan(-1500, new GreenfootImage("BungkusNasi.png"));
+    Makanan karet = new Makanan(-1000, new GreenfootImage("Karet.png"));
+    Makanan batangCabe = new Makanan(-2000, new GreenfootImage("BatangCabe.png"));
+    Makanan arang = new Makanan(-1000, new GreenfootImage("Arang.png"));
+    Makanan tusukSate = new Makanan(-1000, new GreenfootImage("TusukSate.png"));
+    Makanan kulitPisang = new Makanan(-2000, new GreenfootImage("KulitPisang.png"));
+    
+    //Bumbu
+    ArrayList<Bumbu> listBumbu = new ArrayList<Bumbu>();
+    
+    Bumbu cabe = new Cabe();
     
     //DelTimer
     double deltaTime;
     double lastTime = System.currentTimeMillis();
     
+    //timer makanan
     double waktuPanggil = 500;
     double timer = 0;
     
+    //timer bumbu
+    double waktuPanggilBumbu = 1500;
+    double timerBumbu = 0;
+    
     double speedMultiplier = 1;
     
+    //timer extra
     double timerExtra = 0;
     double waktuSpawnerExtra = 10000;
     
-    //Music-music
-    GreenfootSound mainMenuSound = new GreenfootSound("main.mp3");
+    //Score
+    public Life theLife;
+    
+    //Playyer
+    public Player pemain;
     
     public void act()
     {
         spawnerExtra();
         
         muncul();
+        
+        munculBumbu();
         
         speedMultiplier += 0.001;
         
@@ -69,15 +86,17 @@ public class Angkringan extends World
         // Create a new world with 300x500 cells with a cell size of 1x1 pixels.
         super(300, 500, 1); 
         
-        addObject(new Player(), 150, 450);
+        pemain = new Player();
+        addObject(pemain, 150, 450);
         
         //Score
         addObject(new Score(), 200, 10);
         
         //Life
-        addObject(new Life(), 50, 10);
+        theLife = new Life();
+        addObject(theLife, 50, 10);
         
-        //Adding to list
+        //Adding to list makanan
         listMakanan.add(nasiKucing);
         listMakanan.add(gorengan);
         listMakanan.add(sateAyam);
@@ -90,13 +109,21 @@ public class Angkringan extends World
         listMakanan.add(tusukSate);
         listMakanan.add(kulitPisang);
         
-        //Music
-        mainMenuSound.playLoop();
+        //Adding to list bumbu
+        listBumbu.add(cabe);
     }
     
     public Makanan Instantiante(Makanan objek)
     {
         Makanan baru = new Makanan(objek.harga, objek.getImage());
+        
+        return baru;
+    }
+    
+    public Bumbu buatBumbu (Bumbu objek)
+    {
+        Bumbu baru = new Cabe();
+        baru = objek;
         
         return baru;
     }
@@ -113,6 +140,21 @@ public class Angkringan extends World
             addObject(Instantiante(listMakanan.get(pilihObjek)), posisiX, 0);
             
             timer = 0;
+        }
+    }
+    
+    public void munculBumbu()
+    {
+        timerBumbu += deltaTime;
+        
+        if(timer >= waktuPanggilBumbu)
+        {
+            int posisiX = Greenfoot.getRandomNumber(200) + 50;
+            int pilihObjek = Greenfoot.getRandomNumber(10);
+            
+            addObject(Instantiante(listMakanan.get(pilihObjek)), posisiX, 0);
+            
+            timerBumbu = 0;
         }
     }
     

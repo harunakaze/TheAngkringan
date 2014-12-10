@@ -26,5 +26,5 @@ public class Score extends Actor
         scoreString = String.valueOf(thePlayer.get(0).totalBayar);
         
         setImage(new GreenfootImage("SCORE : " + scoreString, 25, Color.BLACK, Color.WHITE));
-    }    
+    }
 }

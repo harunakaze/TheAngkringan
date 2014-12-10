@@ -84,11 +84,30 @@ public class Player extends Benda
             
             getWorld().removeObject(other);
         }
+        
+        if(isTouching(Bumbu.class))
+        {
+            Bumbu other = (Bumbu)getOneIntersectingObject(Bumbu.class);
+            
+            other.efek();
+            
+            getWorld().removeObject(other);
+        }
     }
     
     void mati()
     {
+        Angkringan theAngkringan = (Angkringan)getWorld();
+        
         getWorld().addObject(new GameOver(), 150, 250);
+        
+        theAngkringan.theLife.act();
+        
         Greenfoot.stop();
+    }
+    
+    public void setKecepatanX(int nilai)
+    {
+        this.kecepatanX = (double)nilai;
     }
 }
