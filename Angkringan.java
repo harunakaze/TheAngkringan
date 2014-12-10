@@ -34,6 +34,9 @@ public class Angkringan extends World
     double timerExtra = 0;
     double waktuSpawnerExtra = 10000;
     
+    //Music-music
+    GreenfootSound mainMenuSound = new GreenfootSound("main.mp3");
+    
     public void act()
     {
         spawnerExtra();
@@ -86,6 +89,9 @@ public class Angkringan extends World
         listMakanan.add(arang);
         listMakanan.add(tusukSate);
         listMakanan.add(kulitPisang);
+        
+        //Music
+        mainMenuSound.playLoop();
     }
     
     public Makanan Instantiante(Makanan objek)
